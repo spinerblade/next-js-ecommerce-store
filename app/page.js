@@ -15,7 +15,7 @@ export default function HomePage() {
       <h1 className="text-4xl flex items-center justify-center">
         Welcome to my Ecommerce Store
       </h1>
-      <div className="text-lg">Find the finest products in my store</div>
+      <div className="text-lg">Find the finest products in my store...</div>
       <ul>
         {products.map((product) => {
           return (
