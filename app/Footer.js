@@ -10,7 +10,7 @@ export default function Footer() {
           <br />
           Austria, Hauptstrasse 45/1, 1110. Vienna
         </div>
-        <div></div>
+        <div />
         <div className="flex flex-col gap-5">
           <Link href="/">MyStore</Link>
           <div>Categories</div>

@@ -1,19 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Capitalize, getProducts } from '../database/products';
+import { Capitalize, getProductsInsecure } from '../database/products';
 
 export const metadata = {
   title: 'Home Page',
   description: 'Landing page of the store',
 };
 
-export default function HomePage() {
-  const products = getProducts();
+export default async function ProductsPage() {
+  const products = await getProductsInsecure();
 
   return (
     <>
       <h1 className="text-4xl flex items-center justify-center">
-        Welcome to my Ecommerce Store
+        Welcome to my E-commerce Store
       </h1>
       <div className="text-lg">Find the finest products in my store...</div>
       <ul>

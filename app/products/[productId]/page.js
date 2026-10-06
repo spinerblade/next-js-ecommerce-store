@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Capitalize, getProducts } from '../../../database/products';
+import { Capitalize, getProductInsecure } from '../../../database/products';
 import Quantity from './Quantity';
 
 export const metadata = {
@@ -9,29 +9,26 @@ export const metadata = {
 
 export default async function ProductPage(props) {
   const { productId } = await props.params;
-  const products = getProducts();
-  const singleProduct = products.find((product) => {
-    return product.id === Number(productId);
-  });
+  const product = await getProductInsecure(Number(productId));
 
   return (
     <div>
-      <h1>{Capitalize(singleProduct.name)}</h1>
+      <h1>{Capitalize(product.name)}</h1>
       <Image
         data-test-id="product-image"
         className=""
-        src={`/products/${singleProduct.id}.avif`}
+        src={`/products/${product.id}.avif`}
         width="350"
         height="350"
-        alt={singleProduct.name}
+        alt={product.name}
       />
       <Quantity />
 
       <p data-test-id="product-price">
-        {singleProduct.price}/{singleProduct.measure}
+        {product.price}/{product.measure}
       </p>
-      <p>{singleProduct.origin}</p>
-      <p>{singleProduct.longDescription}</p>
+      <p>{product.origin}</p>
+      <p>{product.longDescription}</p>
     </div>
   );
 }
