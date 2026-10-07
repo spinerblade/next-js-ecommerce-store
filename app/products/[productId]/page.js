@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { Capitalize, getProductInsecure } from '../../../database/products';
 import Quantity from './Quantity';
@@ -10,6 +11,7 @@ export const metadata = {
 export default async function ProductPage(props) {
   const { productId } = await props.params;
   const product = await getProductInsecure(Number(productId));
+  const cartQuantity = (await cookies()).get('cart')?.value || '';
 
   return (
     <div>
@@ -22,7 +24,7 @@ export default async function ProductPage(props) {
         height="350"
         alt={product.name}
       />
-      <Quantity />
+      <Quantity key={cartQuantity} cartQuantity={cartQuantity} />
 
       <p data-test-id="product-price">
         {product.price}/{product.measure}

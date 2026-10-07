@@ -1,9 +1,11 @@
 'use client';
 import { useState } from 'react';
+import { createCookie } from './actions';
 
-export default function Quantity() {
+export default function Quantity(props) {
   const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(props.cartQuantity);
+
   return (
     <div className="flex flex-row">
       <button
@@ -25,16 +27,19 @@ export default function Quantity() {
       >
         +
       </button>
-      <button
-        data-test-id="product-add-to-cart"
-        className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
-        onClick={() => {
-          setCart(cart + quantity);
-        }}
-      >
-        Add to Cart
-      </button>
-      <span>Items in cart: {cart}</span>
+      <form>
+        <button
+          data-test-id="product-add-to-cart"
+          className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
+          formAction={async () => {
+            setCartQuantity(quantity + cartQuantity);
+            await createCookie(cartQuantity);
+          }}
+        >
+          Add to Cart
+        </button>
+      </form>
+      <span>Items in cart: {cartQuantity}</span>
     </div>
   );
 }
