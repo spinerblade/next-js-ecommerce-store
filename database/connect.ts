@@ -8,7 +8,7 @@ import postgres, { type Sql } from 'postgres';
 // Read in values from .env file to process.env
 config();
 
-const postgresJsConfig = {
+export const postgresJsConfig = {
   transform: {
     ...postgres.camel,
     undefined: null,
