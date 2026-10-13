@@ -2,13 +2,15 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Header({ origins = [] }) {
+export default function Header({ origins = [], cartTotal = 0 }) {
   const [open, setOpen] = useState(false);
 
   return (
     <header className=" p-6 bg-mauve-800 text-teal-300">
       <nav className="flex justify-between">
-        <Link href="/">MyStore</Link>
+        <Link data-test-id="products-link" href="/">
+          MyStore
+        </Link>
         <div>
           <button
             className="relative"
@@ -31,6 +33,11 @@ export default function Header({ origins = [] }) {
           )}
         </div>
         <Link href="/about">About Us</Link>
+        <div className="border-2 border-solid border-white p-2 bg-white">
+          <Link data-test-id="cart-link" href="/cart">
+            <div>Cart</div> <div data-test-id="cart-count">({cartTotal})</div>
+          </Link>
+        </div>
       </nav>
     </header>
   );

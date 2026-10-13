@@ -1,0 +1,28 @@
+$button-color: red;
+
+.AboutPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    font-size: 32px;
+    color: #2198ff;
+    font-family: sans-serif;
+    font-weight: lighter;
+  }
+  button {
+    border: #2198ff solid;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    background-color: $button-color;
+  }
+  :hover {
+    background-color: #2198ff;
+  }
+}
+
+.learn {
+  border: 1px solid;
+  padding: 10 px;
+}

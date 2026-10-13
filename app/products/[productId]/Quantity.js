@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { createCookie } from './actions';
+import { addToCart } from './actions';
 
 export default function Quantity(props) {
   const [quantity, setQuantity] = useState(1);
@@ -32,14 +32,17 @@ export default function Quantity(props) {
           data-test-id="product-add-to-cart"
           className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
           formAction={async () => {
-            setCartQuantity(quantity + cartQuantity);
-            await createCookie(cartQuantity);
+            await addToCart(props.productId, quantity);
+            setCartQuantity(cartQuantity + quantity);
+            setQuantity(1);
           }}
         >
           Add to Cart
         </button>
       </form>
-      <span>Items in cart: {cartQuantity}</span>
+      <span>
+        You got {cartQuantity} {props.productName} in your cart
+      </span>
     </div>
   );
 }
