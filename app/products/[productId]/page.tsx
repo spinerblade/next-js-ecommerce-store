@@ -1,11 +1,22 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { Capitalize, getProductInsecure } from '../../../database/products';
 import Quantity from './Quantity';
 
-export async function generateMetadata(props) {
+type Cart = {
+  id: number;
+  quantity: number;
+};
+
+export async function generateMetadata(
+  props: PageProps<'/products/[productId]'>,
+) {
   const { productId } = await props.params;
   const product = await getProductInsecure(Number(productId));
+  if (!product) {
+    notFound();
+  }
 
   return {
     title: `${Capitalize(product.name)} ${product.origin} `,
@@ -13,10 +24,15 @@ export async function generateMetadata(props) {
   };
 }
 
-export default async function ProductPage(props) {
+export default async function ProductPage(
+  props: PageProps<'/products/[productId]'>,
+) {
   const { productId } = await props.params;
   const product = await getProductInsecure(Number(productId));
-  const cart = JSON.parse((await cookies()).get('cart')?.value || '[]');
+  if (!product) {
+    notFound();
+  }
+  const cart: Cart[] = JSON.parse((await cookies()).get('cart')?.value || '[]');
   const cartQuantity =
     cart.find((item) => item.id === product.id)?.quantity || 0;
 

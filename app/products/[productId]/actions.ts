@@ -1,8 +1,13 @@
 'use server';
 import { cookies } from 'next/headers';
 
-export async function addToCart(productId, quantity) {
-  const cart = JSON.parse((await cookies()).get('cart')?.value || '[]');
+type Cart = {
+  id: number;
+  quantity: number;
+};
+
+export async function addToCart(productId: number, quantity: number) {
+  const cart: Cart[] = JSON.parse((await cookies()).get('cart')?.value || '[]');
 
   const existing = cart.find((item) => item.id === productId);
   if (existing) {

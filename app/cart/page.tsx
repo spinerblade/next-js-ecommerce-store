@@ -1,7 +1,10 @@
 import { cookies } from 'next/headers';
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { Capitalize, getProductInsecure } from '../../database/products';
 import { removeFromCart } from './actions';
+import PaymentButtons from './PaymentButtons';
+
+type Cart = { id: number; quantity: number };
 
 export const metadata = {
   title: 'Your Cart',
@@ -9,10 +12,13 @@ export const metadata = {
 };
 
 export default async function CartPage() {
-  const cart = JSON.parse((await cookies()).get('cart')?.value || '[]');
+  const cart: Cart[] = JSON.parse((await cookies()).get('cart')?.value || '[]');
   const items = await Promise.all(
     cart.map(async (item) => {
       const product = await getProductInsecure(item.id);
+      if (!product) {
+        notFound();
+      }
       return { ...product, quantity: item.quantity };
     }),
   );
@@ -57,22 +63,7 @@ export default async function CartPage() {
         </div>
         <div className="basis-1/3 flex flex-col">
           <div>Payment options</div>
-          <Link href="/checkout">
-            <button
-              data-test-id="cart-checkout"
-              className="bg-slate-600 hover:bg-slate-800 hover:text-white w-30 m-1"
-            >
-              Apple Pay
-            </button>
-          </Link>
-          <Link href="/checkout">
-            <button
-              data-test-id="cart-checkout"
-              className="bg-amber-300 hover:bg-amber-500 hover:text-white w-30 m-1"
-            >
-              MasterCard
-            </button>
-          </Link>
+          <PaymentButtons />
         </div>
       </div>
       <div data-test-id="cart-total">TOTAL:{totalBill.toFixed(2)}</div>

@@ -1,6 +1,17 @@
 import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 
+type Product = {
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  measure: string;
+  origin: string;
+  shortDescription: string | null;
+  longDescription: string | null;
+};
+
 // Read in values from .env file to process.env
 config();
 
@@ -11,7 +22,7 @@ const sql = postgres({
   },
 });
 
-const products = await sql`
+const products: Product[] = await sql<Product[]>`
   SELECT
     *
   FROM

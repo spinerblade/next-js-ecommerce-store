@@ -71,3 +71,12 @@ psql -U <user name> <database name>
 ```bash
 sudo -u <user name> psql -U <user name> <database name>
 ```
+
+## Technologies
+
+- [Next.js](https://nextjs.org/)
+- [Postgres.js](https://www.npmjs.com/package/postgres)
+- [Ley](https://www.npmjs.com/package/@upleveled/ley)
+- [Jest](https://jestjs.io/)
+- [Playwright](https://playwright.dev/)
+- [Fly.io](https://fly.io/)

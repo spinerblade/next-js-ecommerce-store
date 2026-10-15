@@ -2,7 +2,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Header({ origins = [], cartTotal = 0 }) {
+type HeaderProps = {
+  origins: string[];
+  cartTotal: number;
+};
+export default function Header({ origins = [], cartTotal = 0 }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   return (

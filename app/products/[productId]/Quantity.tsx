@@ -2,7 +2,13 @@
 import { useState } from 'react';
 import { addToCart } from './actions';
 
-export default function Quantity(props) {
+type Props = {
+  cartQuantity: number;
+  productId: number;
+  productName: string;
+};
+
+export default function Quantity(props: Props) {
   const [quantity, setQuantity] = useState(1);
   const [cartQuantity, setCartQuantity] = useState(props.cartQuantity);
 
