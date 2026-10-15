@@ -13,13 +13,10 @@
     "@upleveled/ley": "1.0.0",
     "dotenv-safe": "9.1.0",
     "next": "16.3.6",
-    "only": "^0.0.2",
     "postgres": "3.4.9",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "sass": "^1.105.1",
-    "server": "^1.0.42",
-    "server-only": "^0.0.1"
+    "sass": "^1.105.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

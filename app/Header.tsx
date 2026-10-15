@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -38,8 +39,25 @@ export default function Header({ origins = [], cartTotal = 0 }: HeaderProps) {
         </div>
         <Link href="/about">About Us</Link>
         <div className="border-2 border-solid border-white p-2 bg-white">
-          <Link data-test-id="cart-link" href="/cart">
-            <div>Cart</div> <div data-test-id="cart-count">({cartTotal})</div>
+          <Link
+            className="relative inline-block"
+            data-test-id="cart-link"
+            href="/cart"
+          >
+            <div>
+              <Image
+                src="/images/cart.svg"
+                alt="cart symbol"
+                width="60"
+                height="60"
+              />
+            </div>{' '}
+            <div
+              className="absolute inset-0 flex items-center justify-center font-extrabold text-red-700"
+              data-test-id="cart-count"
+            >
+              {cartTotal}
+            </div>
           </Link>
         </div>
       </nav>
