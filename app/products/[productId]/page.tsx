@@ -1,13 +1,9 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import type { Cart } from '../../../database/cartType';
 import { Capitalize, getProductInsecure } from '../../../database/products';
 import Quantity from './Quantity';
-
-type Cart = {
-  id: number;
-  quantity: number;
-};
 
 export async function generateMetadata(
   props: PageProps<'/products/[productId]'>,

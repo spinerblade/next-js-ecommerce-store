@@ -30,7 +30,7 @@ test('puts items to cart then fills out checkout page and confirms order', async
     .locator('[data-test-id="cart-checkout"]')
     .filter({ hasText: 'Apple Pay' })
     .click();
-  await expect(page.locator('h1')).toContainText('51');
+  await expect(page.locator('h1')).toContainText('52.41');
 
   const customer = {
     firstName: 'Kevin',

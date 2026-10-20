@@ -80,7 +80,7 @@ type Product = {
   id: number;
   name: string;
   type: string;
-  price: number;
+  price: string;
   measure: string;
   origin: string;
   shortDescription: string | null;
