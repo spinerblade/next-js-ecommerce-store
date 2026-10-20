@@ -13,7 +13,7 @@ export default async function ProductsPage() {
   return (
     <>
       <h1 className="text-4xl flex items-center justify-center">
-        Welcome to my E-commerce Store
+        Welcome to Bayanihan
       </h1>
       <div className="text-lg">Find the finest products in my store...</div>
       <ul>
@@ -29,9 +29,10 @@ export default async function ProductsPage() {
                 <Image
                   className=""
                   src={`/products/${product.id}.avif`}
-                  width="350"
-                  height="350"
+                  width={350}
+                  height={350}
                   alt={product.name}
+                  priority
                 />
               </Link>
               <p>{product.shortDescription}</p>

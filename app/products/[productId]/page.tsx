@@ -43,8 +43,9 @@ export default async function ProductPage(
         data-test-id="product-image"
         className=""
         src={`/products/${product.id}.avif`}
-        width="350"
-        height="350"
+        width={350}
+        height={350}
+        priority
         alt={product.name}
       />
       <Quantity

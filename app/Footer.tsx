@@ -12,7 +12,7 @@ export default function Footer() {
         </div>
         <div />
         <div className="flex flex-col gap-5">
-          <Link href="/">MyStore</Link>
+          <Link href="/">Main Page</Link>
           <div>Categories</div>
         </div>
         <div className="flex flex-col justify-between ">

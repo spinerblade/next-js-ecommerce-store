@@ -19,6 +19,8 @@
     "sass": "^1.105.1"
   },
   "devDependencies": {
+    "@jest/globals": "30.5.2",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "^4",
     "@ts-safeql/eslint-plugin": "^5.4.1",
     "@types/dotenv-safe": "9.1.0",
@@ -28,6 +30,8 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^10.11.0",
     "eslint-config-upleveled": "^11.0.1",
+    "jest": "30.5.2",
+    "jest-environment-jsdom": "30.5.2",
     "libpg-query": "^18.1.5",
     "prettier": "^3.9.9",
     "prettier-plugin-embed": "^0.5.1",
@@ -37,11 +41,11 @@
     "tailwindcss": "^4",
     "typescript": "6.0.3"
   },
-  "packageManager": "pnpm@11.25.0",
+  "packageManager": "pnpm@12.11.2",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.25.0",
+      "version": "12.11.2",
       "onFail": "download"
     }
   }

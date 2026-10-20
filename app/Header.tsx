@@ -14,7 +14,7 @@ export default function Header({ origins = [], cartTotal = 0 }: HeaderProps) {
     <header className=" p-6 bg-mauve-800 text-teal-300">
       <nav className="flex justify-between">
         <Link data-test-id="products-link" href="/">
-          MyStore
+          Main Page
         </Link>
         <div>
           <button
@@ -37,8 +37,8 @@ export default function Header({ origins = [], cartTotal = 0 }: HeaderProps) {
             </div>
           )}
         </div>
-        <Link href="/about">About Us</Link>
-        <div className="border-2 border-solid border-white p-2 bg-white">
+
+        <div className="border-2 border-solid border-taupe-200 p-2 bg-taupe-200 hover:bg-white">
           <Link
             className="relative inline-block"
             data-test-id="cart-link"

@@ -1,10 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
-
-type Cart = {
-  id: number;
-  quantity: number;
-};
+import type { Cart } from '../../../database/cartType';
 
 export async function addToCart(productId: number, quantity: number) {
   const cart: Cart[] = JSON.parse((await cookies()).get('cart')?.value || '[]');

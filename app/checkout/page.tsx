@@ -1,12 +1,8 @@
 import { cookies } from 'next/headers';
+import type { Cart } from '../../database/cartType';
 import { getProductInsecure } from '../../database/products';
 import { checkout } from './actions';
 import styles from './checkout.module.scss';
-
-type Cart = {
-  id: number;
-  quantity: number;
-};
 
 export const metadata = {
   title: 'Checkout',
@@ -28,10 +24,10 @@ export default async function CheckoutPage() {
 
   return (
     <div>
-      <h1>Your total bill: {totalBill.toFixed(2)}</h1>
+      <h1 className="text-3xl p-10">Your total bill: {totalBill.toFixed(2)}</h1>
       <form
         action={checkout}
-        className="flex flex-col m-16 p-16 text-white bg-black"
+        className="flex flex-col items-center m-16 p-16 bg-taupe-300"
       >
         <label>
           First Name
@@ -40,7 +36,7 @@ export default async function CheckoutPage() {
 
             required
             data-test-id="checkout-first-name"
-            className="border border-gray-400 rounded px-2 py-1 bg-gray-50"
+            className={styles.input}
           />
         </label>
         <label>
@@ -58,15 +54,18 @@ export default async function CheckoutPage() {
           <input
             name="email"
             type="email"
+            placeholder="email@address.com"
             required
             data-test-id="checkout-email"
             className={styles.input}
           />
         </label>
+
         <label>
           Address{' '}
           <input
             name="address"
+            placeholder="Musterstrasse 11/11/11"
 
             required
             data-test-id="checkout-address"
@@ -103,6 +102,7 @@ export default async function CheckoutPage() {
             className={styles.input}
           />
         </label>
+
         <label>
           Credit Card{' '}
           <input
@@ -116,6 +116,7 @@ export default async function CheckoutPage() {
         <label>
           Expiration Date{' '}
           <input
+            placeholder="MM/YY"
             name="expirationDate"
 
             required
@@ -127,6 +128,7 @@ export default async function CheckoutPage() {
           Security Code{' '}
           <input
             name="securityCode"
+            placeholder="CVC"
 
             required
             data-test-id="checkout-security-code"
@@ -136,9 +138,9 @@ export default async function CheckoutPage() {
 
         <button
           data-test-id="checkout-confirm-order"
-          className="bg-sky-300 w-15 border-2 border-sky-600 hover:bg-sky-800 hover:text-white"
+          className="bg-amber-400 font-extrabold w-50 border-2 mt-8 text-[24px] border-sky-600 hover:bg-sky-800 hover:text-white"
         >
-          ORDER
+          ORDER NOW
         </button>
       </form>
     </div>

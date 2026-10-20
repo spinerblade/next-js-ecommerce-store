@@ -23,7 +23,7 @@ export default function Quantity(props: Props) {
       >
         -
       </button>
-      <span>Quantity: {quantity}</span>
+      <span data-test-id="quantity-display">Quantity: {quantity}</span>
       <button
         data-test-id="product-quantity"
         className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
@@ -46,7 +46,7 @@ export default function Quantity(props: Props) {
           Add to Cart
         </button>
       </form>
-      <span>
+      <span data-test-id="cart-display">
         You got {cartQuantity} {props.productName} in your cart
       </span>
     </div>

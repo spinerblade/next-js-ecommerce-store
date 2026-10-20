@@ -1,10 +1,9 @@
-import { cookies } from 'next/headers';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Capitalize, getProductInsecure } from '../../database/products';
+import { Capitalize } from '../../database/products';
 import { removeFromCart } from './actions';
+import cartSum from './cartSum';
 import PaymentButtons from './PaymentButtons';
-
-type Cart = { id: number; quantity: number };
 
 export const metadata = {
   title: 'Your Cart',
@@ -12,48 +11,50 @@ export const metadata = {
 };
 
 export default async function CartPage() {
-  const cart: Cart[] = JSON.parse((await cookies()).get('cart')?.value || '[]');
-  const items = await Promise.all(
-    cart.map(async (item) => {
-      const product = await getProductInsecure(item.id);
-      if (!product) {
-        notFound();
-      }
-      return { ...product, quantity: item.quantity };
-    }),
-  );
-  const totalBill = items.reduce((sum, item) => {
-    return sum + Number(item.quantity) * Number(item.price);
-  }, 0);
+  const { totalBill, items } = await cartSum();
 
   return (
     <div>
-      <h1 className="text-4xl">Your cart</h1>
+      <h1 className="text-4xl p-10">Your cart</h1>
       <div className="flex flex-row pt-10 ml-10 mt-10">
         <div className="basis-2/3 border-black border-solid">
-          <p className="text-2xl p-2">Your items</p>
           <ul>
             {items.map((item) => {
+              const itemTotal = (item.price ?? 0) * item.quantity;
+              if (item.id === undefined) {
+                notFound();
+              }
+
               return (
                 <li
                   data-test-id={`cart-product-${item.id}`}
-                  className="p-2"
+                  className="p-2 m-2 border-2 border-mauve-700 w-150 bg-taupe-400"
                   key={item.id}
                 >
-                  {Capitalize(item.name)}:{' '}
+                  {Capitalize(item.name ?? 'Unknown item')}:{' '}
+                  <Image
+                    src={`/products/${item.id}.avif`}
+                    alt={`Image of the product ${item.name}`}
+                    width="200"
+                    height="200"
+                  />
                   <div data-test-id={`cart-product-quantity-${item.id}`}>
-                    {item.quantity}
+                    Quantity: {item.quantity}
                   </div>{' '}
                   <div>
-                    x {item.price}/{item.measure}
+                    Price: {item.price ?? 0}/{item.measure}
                   </div>
-                  <div>{item.price * item.quantity}</div>
-                  <form action={removeFromCart.bind(null, item.id)}>
+                  <div>Subtotal: {itemTotal}</div>
+                  <form
+                    className="flex justify-center"
+                    action={removeFromCart.bind(null, item.id)}
+                  >
                     <button
+                      aria-label="remove-item-button"
                       data-test-id={`cart-product-remove-${item.id}`}
-                      className="text-red-500 hover:text-red-800 border-2 rounded-full bg-slate-500 p-1 w-8 border-solid border-slate-500 hover:bg-slate-700 hover:border-slate-700"
+                      className=" text-black hover:text-white border-2 rounded-full bg-taupe-100 p-1 w-30 border-solid border-black hover:bg-black hover:border-black"
                     >
-                      x
+                      Remove Item from Cart
                     </button>
                   </form>
                 </li>
@@ -61,12 +62,17 @@ export default async function CartPage() {
             })}
           </ul>
         </div>
-        <div className="basis-1/3 flex flex-col">
-          <div>Payment options</div>
+        <div className="basis-1/3 flex flex-col justify-center border-2 p-2 m-2 border-mauve-700 w-150 bg-taupe-400">
+          <div className="flex justify-center text-[24px]">Payment options</div>
           <PaymentButtons />
         </div>
       </div>
-      <div data-test-id="cart-total">TOTAL:{totalBill.toFixed(2)}</div>
+      <div
+        data-test-id="cart-total"
+        className="text-[32px] flex flex-col p-20 bg-taupe-300"
+      >
+        TOTAL Price: {totalBill.toFixed(2)}
+      </div>
     </div>
   );
 }

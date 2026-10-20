@@ -2,17 +2,13 @@ import './globals.css';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { cookies } from 'next/headers';
 import type { ReactNode } from 'react';
+import type { Cart } from '../database/cartType';
 import { getProductsInsecure } from '../database/products';
 import Footer from './Footer';
 import Header from './Header';
 
 type Props = {
   children: ReactNode;
-};
-
-type Cart = {
-  id: number;
-  quantity: number;
 };
 
 const geistSans = Geist({
