@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 import { Capitalize } from '../../database/products';
 import { removeFromCart } from './actions';
 import cartSum from './cartSum';
@@ -20,10 +19,7 @@ export default async function CartPage() {
         <div className="basis-2/3 border-black border-solid">
           <ul>
             {items.map((item) => {
-              const itemTotal = (item.price ?? 0) * item.quantity;
-              if (item.id === undefined) {
-                notFound();
-              }
+              const itemTotal = Number(item.price) * item.quantity;
 
               return (
                 <li
@@ -31,7 +27,7 @@ export default async function CartPage() {
                   className="p-2 m-2 border-2 border-mauve-700 w-150 bg-taupe-400"
                   key={item.id}
                 >
-                  {Capitalize(item.name ?? 'Unknown item')}:{' '}
+                  {Capitalize(item.name)}
                   <Image
                     src={`/products/${item.id}.avif`}
                     alt={`Image of the product ${item.name}`}
@@ -42,9 +38,9 @@ export default async function CartPage() {
                     Quantity: {item.quantity}
                   </div>{' '}
                   <div>
-                    Price: {item.price ?? 0}/{item.measure}
+                    Price: {item.price}/{item.measure}
                   </div>
-                  <div>Subtotal: {itemTotal}</div>
+                  <div>Subtotal: {itemTotal.toFixed(2)}</div>
                   <form
                     className="flex justify-center"
                     action={removeFromCart.bind(null, item.id)}

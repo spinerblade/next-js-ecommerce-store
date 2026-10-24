@@ -1,19 +1,13 @@
 import type { Cart } from '../../database/cartType';
 import getCookies from '../../database/getCookies';
-import { getProductInsecure } from '../../database/products';
+import { getProductsInsecure } from '../../database/products';
+import { calculateCartSum, combineCartWithProducts } from './cartUtils';
 
-export default async function cartSum(mockCart?: Cart[]) {
-  const cart: Cart[] = mockCart ?? (await getCookies());
-  const items = await Promise.all(
-    cart.map(async (item) => {
-      const product = await getProductInsecure(item.id);
-
-      return { ...product, quantity: item.quantity };
-    }),
-  );
-  const totalBill = items.reduce((sum, item) => {
-    return sum + Number(item.quantity) * Number(item.price);
-  }, 0);
+export default async function cartSum() {
+  const cart: Cart[] = await getCookies();
+  const products = await getProductsInsecure();
+  const items = combineCartWithProducts(cart, products);
+  const totalBill = calculateCartSum(items);
 
   return { totalBill, items };
 }
