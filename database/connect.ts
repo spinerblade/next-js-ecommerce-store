@@ -2,7 +2,6 @@
 // to prevent using this file in a Client
 // Component
 
-import { config } from 'dotenv-safe';
 import postgres, { type Sql } from 'postgres';
 import { postgresJsConfig, setEnvironmentVariables } from '../util/config';
 
