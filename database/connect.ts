@@ -4,16 +4,10 @@
 
 import { config } from 'dotenv-safe';
 import postgres, { type Sql } from 'postgres';
+import { postgresJsConfig, setEnvironmentVariables } from '../util/config';
 
 // Read in values from .env file to process.env
-config();
-
-export const postgresJsConfig = {
-  transform: {
-    ...postgres.camel,
-    undefined: null,
-  },
-};
+setEnvironmentVariables();
 
 declare namespace globalThis {
   let postgresSqlClient: Sql;
