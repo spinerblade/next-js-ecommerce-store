@@ -21,7 +21,7 @@ export default function PaymentButtons() {
           onClick={() => {
             router.push('/checkout');
           }}
-          data-test-id="cart-checkout"
+
           className="bg-amber-300 hover:bg-amber-500 hover:text-white w-30 h-10 m-1"
         >
           MasterCard

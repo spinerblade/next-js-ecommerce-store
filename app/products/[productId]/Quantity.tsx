@@ -9,38 +9,54 @@ type Props = {
 };
 
 export default function Quantity(props: Props) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState('1');
   const [cartQuantity, setCartQuantity] = useState(props.cartQuantity);
-
+  const quantityNumber = Math.max(1, Number(quantity));
   return (
     <div className="flex flex-row">
       <button
-        data-test-id="product-quantity"
         className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
         onClick={() => {
-          setQuantity(Math.max(0, quantity - 1));
+          setQuantity(String(Math.max(1, quantityNumber - 1)));
         }}
       >
         -
       </button>
       <span data-test-id="quantity-display">Quantity: {quantity}</span>
       <button
-        data-test-id="product-quantity"
         className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
         onClick={() => {
-          setQuantity(quantity + 1);
+          setQuantity(String(quantityNumber + 1));
         }}
       >
         +
       </button>
       <form>
+        <label>
+          Choose Quantity
+          <input
+            className="bg-[#f9fafb] w-10 m-2"
+            data-test-id="product-quantity"
+            name="quantity"
+            type="number"
+            value={quantity}
+            min="1"
+            step="1"
+            onChange={(event) => {
+              setQuantity(event.target.value);
+            }}
+            onBlur={() => {
+              setQuantity(String(quantityNumber));
+            }}
+          />
+        </label>
         <button
           data-test-id="product-add-to-cart"
           className="bg-indigo-950 text-white m-5 px-10 py-2 rounded-lg"
           formAction={async () => {
-            await addToCart(props.productId, quantity);
-            setCartQuantity(cartQuantity + quantity);
-            setQuantity(1);
+            await addToCart(props.productId, quantityNumber);
+            setCartQuantity(cartQuantity + quantityNumber);
+            setQuantity('1');
           }}
         >
           Add to Cart

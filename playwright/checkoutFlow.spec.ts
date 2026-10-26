@@ -6,20 +6,14 @@ test('puts items to cart then fills out checkout page and confirms order', async
   await page.goto('/');
   await page.locator('[data-test-id="product-1"]').click();
 
-  await page
-    .locator('[data-test-id="product-quantity"]')
-    .filter({ hasText: '+' })
-    .click({ clickCount: 5 });
+  await page.locator('[data-test-id="product-quantity"]').fill('6');
 
   await page.locator('[data-test-id="product-add-to-cart"]').click();
 
   await page.goBack();
   await page.locator('[data-test-id="product-2"]').click();
 
-  await page
-    .locator('[data-test-id="product-quantity"]')
-    .filter({ hasText: '+' })
-    .click({ clickCount: 2 });
+  await page.locator('[data-test-id="product-quantity"]').fill('3');
 
   await page.locator('[data-test-id="product-add-to-cart"]').click();
 
