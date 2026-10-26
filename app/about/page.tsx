@@ -11,7 +11,6 @@ export default function AboutPage() {
       <h1>About Us</h1>
       <div>Our Journey started in a small village..</div>
       <div className={styles.learn}>Learn more</div>
-      <button>Clock</button>
     </div>
   );
 }

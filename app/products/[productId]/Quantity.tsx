@@ -43,8 +43,8 @@ export default function Quantity(props: Props) {
             min="1"
             step="1"
             onChange={(event) => {
-              if (Number(event.target.value) < 0) return;
-              setQuantity(event.target.value);
+              const value = event.target.value;
+              setQuantity(value !== '' && Number(value) < 1 ? '1' : value);
             }}
             onBlur={() => {
               setQuantity(String(quantityNumber));
