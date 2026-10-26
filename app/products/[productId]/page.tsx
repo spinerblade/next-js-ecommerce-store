@@ -50,9 +50,9 @@ export default async function ProductPage(
         cartQuantity={cartQuantity}
       />
 
-      <p data-test-id="product-price">
-        {product.price}/{product.measure}
-      </p>
+      <span data-test-id="product-price">{Number(product.price)}</span>
+
+      <span>/{product.measure}</span>
       <p>{product.origin}</p>
       <p>{product.longDescription}</p>
     </div>
