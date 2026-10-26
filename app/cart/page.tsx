@@ -34,9 +34,10 @@ export default async function CartPage() {
                     width="200"
                     height="200"
                   />
-                  <div data-test-id={`cart-product-quantity-${item.id}`}>
-                    Quantity: {item.quantity}
-                  </div>{' '}
+                  <span>Quantity: </span>
+                  <span data-test-id={`cart-product-quantity-${item.id}`}>
+                    {item.quantity}
+                  </span>
                   <div>
                     Price: {item.price}/{item.measure}
                   </div>
@@ -63,11 +64,9 @@ export default async function CartPage() {
           <PaymentButtons />
         </div>
       </div>
-      <div
-        data-test-id="cart-total"
-        className="text-[32px] flex flex-col p-20 bg-taupe-300"
-      >
-        TOTAL Price: {totalBill.toFixed(2)}
+      <div className="text-[32px] flex flex-col p-20 bg-taupe-300">
+        <span>TOTAL Price:</span>{' '}
+        <span data-test-id="cart-total">{totalBill.toFixed(2)}</span>
       </div>
     </div>
   );

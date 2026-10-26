@@ -19,13 +19,15 @@ export default async function ProductsPage() {
       <ul>
         {products.map((product) => {
           return (
-            <div key={product.id} className="flex flex-row p-10">
+            <li key={product.id} className="flex flex-row p-10">
               <Link
                 data-test-id={`product-${product.id}`}
 
                 href={`/products/${product.id}`}
               >
-                <li className="">{Capitalize(product.name)}</li>
+                <span className="text-2xl font-bold">
+                  {Capitalize(product.name)}
+                </span>
                 <Image
                   className=""
                   src={`/products/${product.id}.avif`}
@@ -36,7 +38,7 @@ export default async function ProductsPage() {
                 />
               </Link>
               <p>{product.shortDescription}</p>
-            </div>
+            </li>
           );
         })}
       </ul>
