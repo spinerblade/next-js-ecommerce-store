@@ -32,9 +32,8 @@ export default async function ProductsPage() {
                   className=""
                   src={`/products/${product.id}.avif`}
                   width={350}
-                  height={350}
+                  height={191}
                   alt={product.name}
-                  priority
                 />
               </Link>
               <p>{product.shortDescription}</p>

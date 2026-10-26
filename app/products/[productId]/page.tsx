@@ -40,8 +40,7 @@ export default async function ProductPage(
         className=""
         src={`/products/${product.id}.avif`}
         width={350}
-        height={350}
-        priority
+        height={191}
         alt={product.name}
       />
       <Quantity

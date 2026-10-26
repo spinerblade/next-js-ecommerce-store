@@ -32,7 +32,7 @@ export default async function CartPage() {
                     src={`/products/${item.id}.avif`}
                     alt={`Image of the product ${item.name}`}
                     width="200"
-                    height="200"
+                    height="109"
                   />
                   <span>Quantity: </span>
                   <span data-test-id={`cart-product-quantity-${item.id}`}>
